@@ -9,7 +9,6 @@ close all; clear; clc;
 %% 
 fileID = fopen('Ping-Pong.mgt','w');   % Open or create new file for writing. Discard existing contents, if any.
 % addpath(genpath('coor_fun'))    % 搜索路径中加入coor_fun文件夹及其下所有文件夹
-% addpath(genpath('nurbs_fun'))
 
 %% append initial conditions
 PP_init(fileID);
