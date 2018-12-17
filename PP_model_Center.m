@@ -16,7 +16,7 @@ fprintf(fileID,'; iEL, TYPE, iMAT, iPRO, iN1, iN2, ANGLE, iSUB, EXVAL, iOPT(EXVA
 ELE_TYPE = 'BEAM'; ELE_iMAT = 1; ELE_ANGLE = 0; ELE_iSUB = 0;  % iMAT = 1材料钢结构Q345
 
 fprintf(fileID,'; 中层网格外 杆件\n');
-ELE_iPRO = 2;
+ELE_iPRO = 1;
 iNO_LowerOuter = iNO_LowerOuter_end;
 iNO_UpperOuter = iNO_UpperOuter_init;
 for i = 1:Stadium_arc_num+1
@@ -30,9 +30,9 @@ for i = 1:Stadium_arc_num+1
 end
 
 fprintf(fileID,'; 中层网格内 杆件\n');
-ELE_iPRO = 2;
+ELE_iPRO = 1;
 iNO_LowerInner = iNO_LowerInner_end;
-iNO_UpperInner = iNO_UpperInner_init;
+iNO_UpperInner = iNO_UpperInner_init+Stadium_arc_num*2+1; % 上两层的点，即上一个diamond
 for i = 1:Stadium_arc_num+1
     iN1 = iNO_LowerInner-Stadium_arc_num-1+i; % 外层节点
     iN2 = iNO_UpperInner+i; % 内层对应位置的节点

@@ -1,6 +1,6 @@
 %% function
 % MGT lower inner diamond
-% no nodal loads
+% no nodal loads / 2 more Z(an extra diamond)
 % Xu Yi, 2018
 
 %%
@@ -11,10 +11,11 @@ fprintf(fileID,'; iNO, X, Y, Z\n');
 
 % Z coordinate % ÓÉÓÚÊÇÁâĞÎ(½»´í²¼ÖÃ)£¬¹Êstadium_R·½Ïò¼°¸ß¶ÈZ·½ÏòµÄ½Ç¶È¶¼ĞèÒª/2(¼´·Ö¶Î¶àÒ»±¶)
 Lower_Z_num = Lower_arc_num*2; % ZÖá·Ö¸ôÊı % lower arc
-Lower_Z = zeros(Lower_Z_num+1,1);
-Lower_Z_R = zeros(Lower_Z_num+1,1); % ÓëZ±ê¸ß¶ÔÓ¦µÄstadium_R·½ÏòµÄ°ë¾¶£¬Ô²ĞÄÍ¬stadium_R
 Lower_angle_i = Lower_angle / Lower_Z_num;
-for i = 1:Lower_Z_num
+Lower_Z_num2 = Lower_Z_num+2;
+Lower_Z = zeros(Lower_Z_num2+1,1); % an extra diamond(+2)
+Lower_Z_R = zeros(Lower_Z_num2+1,1); % ÓëZ±ê¸ß¶ÔÓ¦µÄstadium_R·½ÏòµÄ°ë¾¶£¬Ô²ĞÄÍ¬stadium_R
+for i = 1:Lower_Z_num2
     Lower_Z(i+1) = Lower_CoC(2) - cos(Lower_angle_origin+Lower_angle_i*i)*Lower_R;
     Lower_Z_R(i+1) = Lower_CoC(1) + sin(Lower_angle_origin+Lower_angle_i*i)*Lower_R;
 end
@@ -25,7 +26,7 @@ Lower_Z_R = Lower_Z_R + Stadium_R;
 % XY coordinate % ÓÉÓÚÊÇÁâĞÎ(½»´í²¼ÖÃ)£¬¹Êstadium_R·½Ïò¼°¸ß¶ÈZ·½ÏòµÄ½Ç¶È¶¼ĞèÒª/2(¼´·Ö¶Î¶àÒ»±¶)
 fprintf(fileID,'; ÏÂ²ãÍø¸ñÄÚ ½Úµã\n');
 iNO_Lower_init = iNO; % ±¸·İ
-for i = 1:Lower_Z_num+1 % ´Ë´¦ÓëÉÏ²»Í¬
+for i = 1:Lower_Z_num2+1 % ´Ë´¦ÓëÉÏ²»Í¬
     for j = 1:Stadium_arc_num+1 % ´Ë´¦ÓëÉÏ²»Í¬ / ÇÒÆæÊı²ã+1£¬Å¼Êı²ã²»ĞèÒª+1
         if rem(i,2) == 1 % ÆæÊı²ã
             temp_angle = Stadium_angle/Stadium_arc_num*(j-1);
@@ -55,7 +56,7 @@ ELE_TYPE = 'BEAM'; ELE_iMAT = 1; ELE_ANGLE = 0; ELE_iSUB = 0;  % iMAT = 1²ÄÁÏ¸Ö½
 fprintf(fileID,'; ÏÂ²ãÍø¸ñÄÚ ¸Ë¼ş\n');
 ELE_iPRO = 2;
 iNO = iNO_Lower_init; % ³õÊ¼»¯iNO
-for i = 1:Lower_Z_num % ´Ë´¦ÓëÉÏ²»Í¬ ÀàËÆÖù×Ó£¬Ñ­»·ÊıÎª²ãÊı-1
+for i = 1:Lower_Z_num2 % ´Ë´¦ÓëÉÏ²»Í¬ ÀàËÆÖù×Ó£¬Ñ­»·ÊıÎª²ãÊı-1
     for j = 1:Stadium_arc_num+1	% ÆæÊı²ã¡¢Å¼Êı²ãÂÔÓĞ²»Í¬(ÓÉÓÚ½ÚµãÊı²»Í¬)
         if rem(i,2) == 0 && j == Stadium_arc_num+1
         else
