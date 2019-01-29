@@ -1,7 +1,7 @@
 %% function
 % MGT initial conditions
 % 
-% Xu Yi, 2019
+% Xu Yi, 2018
 
 %%
 function PP_init(fileID)
