@@ -18,7 +18,7 @@ fprintf(fileID,'\n');
 
 %% VERSION
 fprintf(fileID,'*VERSION\n');
-fprintf(fileID,'   8.7.5\n');
+fprintf(fileID,'   8.8.0\n');
 fprintf(fileID,'\n');
 
 %% UNIT
